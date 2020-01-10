@@ -19,6 +19,7 @@ export default class EditContact extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+            id: '',
             name: '',
             surname: '',
             email: '',
@@ -36,14 +37,14 @@ export default class EditContact extends React.Component {
     }
     
     componentDidMount() {
-        axios.get('http://localhost:27017/contacts/')
+        axios.get('http://localhost:27017/contacts/'+ this.props.match.params.id)
         .then(response => {
             this.setState({
-                name: response.data[0].name,
-                surname: response.data[0].surname,
-                email: response.data[0].email,
-                address: response.data[0].address,
-                phones: response.data[0].phones,
+                name: response.data.name,
+                surname: response.data.surname,
+                email: response.data.email,
+                address: response.data.address,
+                phones: response.data.phones,
             })
         });
     }
