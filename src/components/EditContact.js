@@ -6,6 +6,13 @@ const validatePhone = (phone) => {
     let regex = /^[\+]?[(]?[3][0][)]?[\s\.]?[0-9]{10}$|^[0-9]{10}$/;    
     return regex.test(phone);
 }
+
+const validateEmail = (email) => {
+    // eslint-disable-next-line
+   let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+   return regex.test(email)
+};
+
 export default class EditContact extends React.Component {
     constructor(props){
         super(props)
@@ -14,7 +21,7 @@ export default class EditContact extends React.Component {
         this.handleEmailchange = this.handleEmailchange.bind(this);
         this.handleAddresschange = this.handleAddresschange.bind(this);
         this.handlePhonechange = this.handlePhonechange.bind(this);
-        this.addPhone = this.addPhone.bind(this);
+        this.updatePhone = this.updatePhone.bind(this);
         this.deletePhone = this.deletePhone.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
@@ -62,9 +69,27 @@ export default class EditContact extends React.Component {
     }
 
     handleEmailchange(e){
-        this.setState({
-            email: e.target.value
-        });
+        let value = e.target.value;
+        if(validateEmail(value)){
+            this.setState({
+                email: e.target.value,
+                errors: {
+                    email: '',
+                    phones: this.state.errors.phones
+                },
+                disabled: false
+            });
+        }
+        else{
+            this.setState({
+                email: e.target.value,
+                errors: {
+                    email: 'Invalid email, check syntax',
+                    phones: this.state.errors.phones
+                },
+                disabled: true
+            });
+        }
     }
 
     handleAddresschange(e){
@@ -81,21 +106,23 @@ export default class EditContact extends React.Component {
                 currentPhone: e.target.value,
                 disabled: false,
                 errors: {
-                    phones: 'Check!'
+                    phones: 'Check!',
+                    email: this.state.errors.email
                 }
             });
         }else{
             this.setState({
                 currentPhone: e.target.value,
                 errors: {
-                    phones: "Invalid Phone"
+                    phones: "Invalid Phone",
+                    email: this.state.errors.email
                 },
                 disabled: true
             });
         }
     }
     
-    addPhone(){
+    updatePhone(){
         this.setState({
             phones: [...this.state.phones, this.state.currentPhone]
         });
@@ -155,20 +182,24 @@ export default class EditContact extends React.Component {
                         <div className="form-group col-md-6">
                             <label>Name</label>
                             <input type="text" className="form-control" name="name" onChange={this.handleNamechange} value={this.state.name} />
+                            <small className="text-danger">{this.state.errors.name}</small>
                         </div>
                         <div className="form-group col-md-6">
                             <label>Surname</label>
                             <input type="text" className="form-control" name="surname" onChange={this.handleSurnamechange} value={this.state.surname} />
+                            <small className="text-danger">{this.state.errors.surname}</small>
                         </div>
                     </div>
                     <div className="row">
                         <div className="form-group col-md-6">
                             <label>Email</label>
                             <input type="text" className="form-control" name="email" onChange={this.handleEmailchange} value={this.state.email} />
+                            <small className="text-danger">{this.state.errors.email}</small>
                         </div>                    
                         <div className="form-group col-md-6">
                             <label>Address</label>
                             <input type="text" className="form-control" name="address" onChange={this.handleAddresschange} value={this.state.address}/>
+                            <small className="text-danger">{this.state.errors.address}</small>
                         </div>
                     </div>
                     <div className="row">
@@ -195,7 +226,7 @@ export default class EditContact extends React.Component {
 
                                 </div>
                                 {this.state.disabled ? <button type="button" className="btn btn-primary btn-sm" style={{width: "50%",margin: "auto"}} disabled>Add Phone</button> :                                                
-                                <button type="button" className="btn btn-primary btn-sm" style={{width: "50%",margin: "auto"}} onClick={this.addPhone}>Add Phone</button>}
+                                <button type="button" className="btn btn-primary btn-sm" style={{width: "50%",margin: "auto"}} onClick={this.updatePhone}>Add Phone</button>}
                             </div>
                         </div>
                         <div className="col-md-4"></div>              

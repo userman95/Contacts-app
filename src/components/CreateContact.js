@@ -48,9 +48,6 @@ export default class CreateContact extends React.Component {
         }
     }
 
-    componentDidMount(){
-        console.log(this.state.phones === undefined)
-    }
     handleNamechange(e){
         this.setState({
             name: e.target.value
@@ -69,7 +66,8 @@ export default class CreateContact extends React.Component {
             this.setState({
                 email: e.target.value,
                 errors: {
-                    email: ''
+                    email: '',
+                    phones: this.state.errors.phones
                 },
                 disabled: false
             });
@@ -77,7 +75,8 @@ export default class CreateContact extends React.Component {
         else{
             this.setState({
                 errors: {
-                    email: 'Invalid email, check syntax'
+                    email: 'Invalid email, check syntax',
+                    phones: this.state.errors.phones
                 },
                 disabled: true
             });
@@ -107,14 +106,16 @@ export default class CreateContact extends React.Component {
                 currentPhone: e.target.value,
                 disabled: false,
                 errors: {
-                    phones: 'Check!'
+                    phones: 'Check!',
+                    email: this.state.errors.email
                 }
             });
         }else{
             this.setState({
                 currentPhone: e.target.value,
                 errors: {
-                    phones: "Invalid Phone"
+                    phones: "Invalid Phone",
+                    email: this.state.errors.email
                 },
                 disabled: true
             });
