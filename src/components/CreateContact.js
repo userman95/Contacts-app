@@ -149,19 +149,18 @@ export default class CreateContact extends React.Component {
         axios.post('http://localhost:27017/contacts/add',contact)
         .then(() => window.location = '/')
         .catch(error => {
-            console.log(error.response)
             if(!error.response.data.errors){
-                if(error.response.data.keyValue.email){
+                if(error.response.data.keyValue.email){ // an uparxei error sto email prosthiki error sto state
                     this.setState({
                         errors: {
                             email: 'Email already exists!'
                         }
                     });                            
                 }
-                else if(error.response.data.keyValue.phones && this.state.phones !== undefined){
+                else if(error.response.data.keyValue.phones && this.state.phones !== undefined){ 
                     this.setState({
                         errors: {
-                            phones: 'Phone already exists!'
+                            phones: 'Phone already exists!' // an uparxei error sta phones prosthiki error sto state
                         },
                         disabled: true
                     });     

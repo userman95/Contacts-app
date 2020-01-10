@@ -33,7 +33,7 @@ export default class EditContact extends React.Component {
             address: '',
             phones: [],
             currentPhone: '',
-            errors: {
+            errors: {   // Error handling apo server alla kai apo user input
                 name: '',
                 surname: '',
                 email: '',
@@ -150,7 +150,7 @@ export default class EditContact extends React.Component {
         .then(() => window.location = '/')
         .catch(error => {
             // Ta errors pou parousiazontai epeita apo epeksergasia ston server
-            // apothikeuontai sta ekastote states. Kai parousiazontai sto small element otan ginetai to submit
+            // apothikeuontai sta ekastote states kai parousiazontai sto small element otan ginetai to submit.
             this.setState({
                 errors: {
                     name: error.response.data.errors.name ? error.response.data.errors.name.message : '',
