@@ -15,7 +15,7 @@
 
 ## Run 
  Στη συνέχεια στον φάκελο `./backend` τρέξτε `nodemon server` και τέλος `npm start` στο parent directory του.
- Κανετε connect sto PORT `27017` και πηγαινετε στο `http://localhost:3000/`.
+ Κανετε connect στο PORT `27017` και πηγαινετε στο `http://localhost:3000/`.
 
 ### Contact List 
 ![img1](https://github.com/userman95/Contacts-app/blob/master/public/img1.png)

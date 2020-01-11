@@ -219,34 +219,34 @@ export default class CreateContact extends React.Component {
                     <div className="row">
                         <div className="col-md-4"></div>              
                         <div className="form-group col-md-4 col-sm-12">
-                                <div className="card" style={{padding: "16px 2px"}}>
-                                    <label style={{textAlign: "center"}}>Phone</label>
-                                    <ul style={{listStyle: "none",textAlign: "center",padding: "0"}}>
+                                <div className="card">
+                                    <label className="text-center">Phone</label>
+                                    <ul className="phone-list">
                                         {
-                                            Object.keys(this.state.phones).map(key=>
+                                            Object.keys(this.state.phones).map( key =>
                                                 <li style={phoneStyle} key={key+3}>{this.state.phones[key]}
-                                                    <button type="button" className="close" style={{fontSize: "1.4rem"}} aria-label="Close" onClick={() => this.deletePhone(this.state.phones[key])}>
+                                                    <button type="button" className="close x-button" aria-label="Close" onClick={() => this.deletePhone(this.state.phones[key])}>
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </li>
                                             )
                                         }
                                     </ul>  
-                                    <div className="form-group" style={{textAlign: "center"}}>
-                                        <input style={{width: "80%",margin: "auto"}} type="text" name="phone" placeholder="New phone" className="form-control" onChange={this.handlePhonechange}  />
+                                    <div className="form-group text-center">
+                                        <input type="text" name="phone" placeholder="New phone" className="form-control phone-input" onChange={this.handlePhonechange}  />
                                         
                                         {this.state.disabled ? <small className="text-danger" >{this.state.errors.phones}</small> :
                                         <small className="text-success">{this.state.errors.phones}</small>}
 
                                     </div>
-                                    {this.state.disabled ? <button type="button" className="btn btn-outline-primary btn-sm" style={{width: "50%",margin: "auto"}} disabled>Add Phone</button> :                                                
-                                    <button type="button" className="btn btn-primary btn-sm" style={{width: "50%",margin: "auto"}} onClick={this.addPhone}>Add Phone</button>}
+                                    {this.state.disabled ? <button type="button" className="btn btn-outline-primary btn-sm add-phone" disabled>Add Phone</button> :                                                
+                                    <button type="button" className="btn btn-primary btn-sm add-phone" onClick={this.addPhone}>Add Phone</button>}
                                 </div>
                             </div>
                         <div className="col-md-4"></div>              
                     </div>
-                    {this.state.disabled ? <button type="submit" className="btn btn-primary" style={{float: "right"}} disabled >Submit Contact</button> :                                                
-                    <button type="submit" className="btn btn-primary" style={{float: "right"}}>Submit Contact</button>}
+                    {this.state.disabled ? <button type="submit" className="btn btn-primary float-right" disabled >Submit Contact</button> :                                                
+                    <button type="submit" className="btn btn-primary float-right">Submit Contact</button>}
                </form>
             </div>
         );
