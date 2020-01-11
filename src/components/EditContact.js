@@ -231,7 +231,7 @@ export default class EditContact extends React.Component {
                         </div>
                         <div className="col-md-4"></div>              
                     </div>
-                   <input type="submit" className="btn btn-primary" value="Update Contact float-right" />
+                   <input type="submit" className="btn btn-primary float-right" value="Update Contact" />
                </form>
             </div>
         );
